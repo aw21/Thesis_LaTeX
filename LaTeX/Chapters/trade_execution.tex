@@ -1,0 +1,24 @@
+The simulated market environment can be used to assess the performance of a given trade execution strategy. Using this procedure, the agent can adjust their trading strategy to acquire or sell their inventory at the most favorable price before executing the trade in reality. Section \ref{ch:strategies} provides an overview of common algorithmic trade execution strategies. Section \ref{ch:sim_results} uses or simulated market environment to evaluate the performance of the TWAP and VWAP strategies as described in Subsection \ref{ch:impact-driven}.
+
+\section{Trade Execution Strategies} \label{ch:strategies}
+Trade execution strategies can be broadly classified into impact-driven, cost-driven, and opportunistic algorithms (\cite{labadie:hal-00590283}).
+
+\subsection{Impact-Driven Algorithms} \label{ch:impact-driven}
+Impact-driven algorithms seek to minimize the market impact of a large trade by splitting it into a series of smaller trades over time. 
+
+The Time Weighted Average Price (TWAP) algorithm splits a large order of size $A$ into $n$ smaller orders of size $A/n$ uniformly over a time period $T$. Modifications of the default TWAP strategy where the size and timing of orders is slightly varied are often preferred in order to reduce predictability by third parties. When simulating TWAP performance, I use the default TWAP strategy, assuming that no third party takes action upon detecting our TWAP strategy and that the market reacts as it normally would to our trades.
+
+The Volume Weighted Average Price (VWAP) algorithm is similar to the TWAP algorithm, but it divides the time period $T$ into sub-periods where the total volume of market activity differs. The size of the orders during each sub-period is proportional to its volume of market activity. The volume of market activity in each sub-period is typically predicted using historical data. VWAP has the hypothetical advantage of making larger trades when there is more market activity and smaller trades when there is less, thereby minimizing price impact. However, it runs the risk of incurring significant costs if the historical data does not reflect the trade activity at the time of execution or the volume changes significantly during trades (i.e. when a price shock occurs). The VWAP trading algorithm should not be confused with VWAP benchmark used to measure the performance of trade execution (Chapter \ref{ch:intro}).
+
+POV Algorithms do ???????????????.
+
+\subsection{Cost-Driven Algorithms}
+Hi
+
+\subsection{Opportunistic Algorithms}
+Hi
+
+
+
+\section{Trade Simulation Results} \label{ch:sim_results}
+To begin with an LOB that is representative of the market, I pick the volume at each price to be 

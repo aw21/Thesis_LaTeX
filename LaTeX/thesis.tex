@@ -1,0 +1,85 @@
+\RequirePackage[table]{xcolor}
+\documentclass[12pt,lot,lol,lof]{puthesis_undergraduate}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[round, longnamesfirst]{natbib} % for nice bibliography
+\usepackage{url}
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{color}
+\RestyleAlgo{boxruled}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+}
+\newcommand{\subf}[2]{%
+  {\small\begin{tabular}[t]{@{}c@{}}
+  #1\\#2
+  \end{tabular}}%
+}
+
+%Do not un-comment the next two lines
+%Included for Gather Purpose only in WinEdt (ignore for other editors):
+%input "./Bibliography/refs.bib"
+
+\title{Using Simulated Limit Order Book Data To Evaluate Optimal Trade Execution Algorithms: Interim Report}
+\submitted{June 2019}  %graduation date
+\author{Andrew Wang}
+\advisor{Professor Mykhaylo Shkolnikov} %
+%\dedication{To me}
+
+
+\abstract{
+\input{Chapters/abstract}
+}
+
+\acknowledgements{
+\input{Chapters/acknowledgments}
+}
+
+\begin{document}
+
+\chapter{Introduction}\label{ch:intro}  %insert chapter title
+\input{Chapters/introduction} % and path to the .tex file (no need to include .tex)
+
+\chapter{Literature Review}\label{ch:litreview}
+\input{Chapters/literature_review}
+
+\chapter{Data Source}\label{ch:data_source}
+\input{Chapters/data}
+
+\chapter{Modelling LOB Dynamics}\label{ch:experiment}
+\input{Chapters/experiment}
+
+\chapter{Simulating the LOB} \label{ch:simulation}
+\input{Chapters/simulation}
+
+\chapter{Predicting Trade Execution Performance} \label{ch:trade_execution}
+\input{Chapters/trade_execution}
+
+\chapter{Conclusion}
+\input{Chapters/conclusion}
+
+\chapter{Code Listings}
+\input{Chapters/code_listings.tex}
+
+\bibliographystyle{apa}
+\bibliography{Bibliography/refs} \label{bib}
+
+
+\end{document}
