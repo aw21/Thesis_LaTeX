@@ -1,24 +1,101 @@
 The simulated market environment can be used to assess the performance of a given trade execution strategy. Using this procedure, the agent can adjust their trading strategy to acquire or sell their inventory at the most favorable price before executing the trade in reality. Section \ref{ch:strategies} provides an overview of common algorithmic trade execution strategies. Section \ref{ch:sim_results} uses or simulated market environment to evaluate the performance of the TWAP and VWAP strategies as described in Subsection \ref{ch:impact-driven}.
 
 \section{Trade Execution Strategies} \label{ch:strategies}
-Trade execution strategies can be broadly classified into impact-driven, cost-driven, and opportunistic algorithms (\cite{labadie:hal-00590283}).
+Trade execution strategies can be broadly classified into impact-driven and opportunistic algorithms (\cite{labadie:hal-00590283}).
 
 \subsection{Impact-Driven Algorithms} \label{ch:impact-driven}
 Impact-driven algorithms seek to minimize the market impact of a large trade by splitting it into a series of smaller trades over time. 
 
-The Time Weighted Average Price (TWAP) algorithm splits a large order of size $A$ into $n$ smaller orders of size $A/n$ uniformly over a time period $T$. Modifications of the default TWAP strategy where the size and timing of orders is slightly varied are often preferred in order to reduce predictability by third parties. When simulating TWAP performance, I use the default TWAP strategy, assuming that no third party takes action upon detecting our TWAP strategy and that the market reacts as it normally would to our trades.
+Time Weighted Average Price (TWAP) algorithms split a large order of size $A$ into $n$ smaller orders of size $A/n$ uniformly over a time period $T$. Modifications of the default TWAP strategy where the size and timing of orders is slightly varied are often preferred in order to reduce predictability by third parties. When simulating TWAP performance, I use the default TWAP strategy, assuming that no third party takes action upon detecting our TWAP strategy and that the market reacts as it normally would to our trades.
 
-The Volume Weighted Average Price (VWAP) algorithm is similar to the TWAP algorithm, but it divides the time period $T$ into sub-periods where the total volume of market activity differs. The size of the orders during each sub-period is proportional to its volume of market activity. The volume of market activity in each sub-period is typically predicted using historical data. VWAP has the hypothetical advantage of making larger trades when there is more market activity and smaller trades when there is less, thereby minimizing price impact. However, it runs the risk of incurring significant costs if the historical data does not reflect the trade activity at the time of execution or the volume changes significantly during trades (i.e. when a price shock occurs). The VWAP trading algorithm should not be confused with VWAP benchmark used to measure the performance of trade execution (Chapter \ref{ch:intro}).
+Volume Weighted Average Price (VWAP) algorithms are similar to TWAP algorithms, but they divide the time period $T$ into sub-periods where the total volume of market activity differs. The size of the orders during each sub-period is proportional to its volume of market activity. The volume of market activity in each sub-period is typically predicted using historical data. VWAP has the hypothetical advantage of making larger trades when there is more market activity and smaller trades when there is less, thereby minimizing price impact. However, it runs the risk of incurring significant costs if the historical data does not reflect the trade activity at the time of execution or the volume changes significantly during trades (i.e. when a price shock occurs). The VWAP trading algorithm shares the name with the VWAP benchmark used to measure the performance of trade execution (Chapter \ref{ch:intro}).
 
-POV Algorithms do ???????????????.
+Percentage of Volume algorithms (POV), like VWAP, generate sizes of orders based on trading volume in a given period. However, they trade a fixed percentage of the current market volume in each period based on a desired participation rate. In contrast with the TWAP and VWAP algorithms that have predetermined trading schedules, POV algorithms have a dynamically determined trading schedule.
 
 \subsection{Cost-Driven Algorithms}
-Hi
+Cost-driven algorithms seek to minimize transaction costs, including market impact and market timing risks. In addition to market impact consideration taken in impact-driven algorithms above, cost-driven algorithms adjust the time horizon of trades to account for market timing risks (i.e. orders for more volatile assets are executed in a shorter time horizon). Implementation Shortfall algorithms attempt to minimize the difference between the price at which the investor decides to make the trade and the average price at which the trade is executed. Market Close algorithms are similar to Implementation Shortfall algorithms, except that the benchmark is the closing price.
 
 \subsection{Opportunistic Algorithms}
-Hi
-
+Opportunistic algorithms take advantage of favorable market conditions. Price Inline algorithms dynamically adjust trading patterns in response to the price. Liquidity Driven algorithms take into account order book depth and availability of venues for trading. Pair Trading algorithms consist of buying one asset and selling another. If the assets are correlated the risks from one asset balance out the risks from the other. Pair Trading takes advantage of mean-reverting behavior to profit. 
 
 
 \section{Trade Simulation Results} \label{ch:sim_results}
-To begin with an LOB that is representative of the market, I pick the volume at each price to be 
+\subsection{Initial LOB}
+To begin with an LOB that is representative of the market, I pick the reference price to be the time weighted average price of the asset rounded to the nearest mid-price. I pick the volume at the first 10 surrounding bid and ask prices to be the time weighted average volume at those positions, and 100 elsewhere. I then maintain and update the LOB as simulation proceeds. The starting book is shown in Table \ref{tab:starting_LOB}.
+
+\begin{table}[htbp]
+\caption{Starting LOB for Simulation. Reference Price = 516.5} \label{tab:starting_LOB}
+\begin{center}
+\begin{tabular}{ll|ll}
+\hline \hline
+\multicolumn{2}{l|}{\textbf{Bids}} & \multicolumn{2}{l}{\textbf{Asks}} \\
+\hline
+Price        & Volume    & Price      & Volume      \\
+587.93       & 516       & 517        & 495.79      \\
+1425.68      & 515       & 518        & 983.24      \\
+2328.27      & 514       & 519        & 1475.59     \\
+2735.44      & 513       & 520        & 2170.60     \\
+2578.26      & 512       & 521        & 2456.86     \\
+1338.90      & 511       & 522        & 1807.16     \\
+609.82       & 510       & 523        & 817.16      \\
+292.86       & 509       & 524        & 420.61      \\
+250.14       & 508       & 525        & 404.11      \\
+287.13       & 507       & 526        & 390.99             
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{TWAP Strategy}
+As described in \ref{ch:impact-driven}, the TWAP strategy consists of splitting the large trade into equally-sized smaller trades uniformly across the time period. To test the TWAP strategy, I simulate a market buy order of size 40000 over a 10 minute period. An example is shown in table \ref{tab:twap_order} where we split the trade into 7 parts.
+
+\begin{table}[htbp]
+\begin{center}
+\caption{TWAP Order} \label{tab:twap_order}
+\begin{tabular}{l|l|l}
+\hline \hline
+\multicolumn{3}{l}{VWAP = 524.92} \\
+\hline
+Time     & Price    & Volume      \\
+\hline
+75       & 517      & 141.892     \\
+75       & 519      & 1061.710    \\
+75       & 520      & 3045.330    \\
+75       & 521      & 1148.698    \\
+75       & 523      & 316.656     \\
+150      & 519      & 224.031     \\
+150      & 520      & 1270.225    \\
+150      & 521      & 601.476     \\
+150      & 522      & 360.973     \\
+150      & 523      & 160.970     \\
+150      & 524      & 2271.952    \\
+150      & 525      & 824.658     \\
+225      & 522      & 68.925      \\
+225      & 523      & 956.303     \\
+225      & 524      & 1637.196    \\
+225      & 525      & 3051.862    \\
+300      & 523      & 51.124      \\
+300      & 524      & 1644.643    \\
+300      & 525      & 1884.850    \\
+300      & 526      & 1603.515    \\
+300      & 527      & 530.154     \\
+375      & 524      & 1883.950    \\
+375      & 525      & 1182.172    \\
+375      & 526      & 375.972     \\
+375      & 527      & 2272.192    \\
+450      & 525      & 289.284     \\
+450      & 527      & 3089.449    \\
+450      & 528      & 2335.553    \\
+525      & 527      & 4.219       \\
+525      & 528      & 708.826     \\
+525      & 529      & 3215.897    \\
+525      & 530      & 654.964     \\
+525      & 531      & 832.364     \\
+525      & 532      & 298.017    
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+\subsection{VWAP Strategy}
+
