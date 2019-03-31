@@ -12,6 +12,8 @@
 \usepackage{algorithm2e}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{multirow}
+\usepackage[caption=false]{subfig}
 \RestyleAlgo{boxruled}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -37,11 +39,11 @@
 %Included for Gather Purpose only in WinEdt (ignore for other editors):
 %input "./Bibliography/refs.bib"
 
-\title{Using Simulated Limit Order Book Data To Evaluate Optimal Trade Execution Algorithms: Interim Report}
-\submitted{June 2019}  %graduation date
+\title{Using Simulated Limit Order Book Data To Evaluate Trade Execution Algorithms}
+\submitted{April 16, 2019}
 \author{Andrew Wang}
-\advisor{Professor Mykhaylo Shkolnikov} %
-%\dedication{To me}
+\advisor{Professor Mykhaylo Shkolnikov}
+\dedication{To me}
 
 
 \abstract{
@@ -54,8 +56,8 @@
 
 \begin{document}
 
-\chapter{Introduction}\label{ch:intro}  %insert chapter title
-\input{Chapters/introduction} % and path to the .tex file (no need to include .tex)
+\chapter{Introduction}\label{ch:intro}
+\input{Chapters/introduction}
 
 \chapter{Literature Review}\label{ch:litreview}
 \input{Chapters/literature_review}
@@ -69,12 +71,13 @@
 \chapter{Simulating the LOB} \label{ch:simulation}
 \input{Chapters/simulation}
 
-\chapter{Predicting Trade Execution Performance} \label{ch:trade_execution}
+\chapter{Evaluating Trade Execution Performance} \label{ch:trade_execution}
 \input{Chapters/trade_execution}
 
 \chapter{Conclusion}
 \input{Chapters/conclusion}
 
+\appendix
 \chapter{Code Listings}
 \input{Chapters/code_listings.tex}
 

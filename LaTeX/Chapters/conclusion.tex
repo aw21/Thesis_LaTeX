@@ -1,3 +1,22 @@
-Here, I will summarize the experiment, results, and performance of the model.
-\section{Future Work}
-Here, I will discuss future work that could improve a part of the model (simulating the LOB, overcoming limitations, etc.) and how this work could be applied to gain additional insights.
+\section{Summary of Results}
+In this thesis, a queue-reactive model was developed to simulate LOB dynamics that is a modified version of the one developed by \cite{A6}. Data from the ETC-USD order book of the Coinbase Pro Exchange was used to develop the model and estimate parameters. Arrivals of events at different bid and ask positions were found to be highly correlated and were jointly modelled as a multivariate Poisson process. The size of these events were modelled as exponential random variables. 
+
+The model was used to simulate the behavior of an artificial LOB over time. This simulated market environment was used to evaluate the performance of TWAP and VWAP trade execution strategies on acquiring a large amount of inventory, with the agent's trades impacting the LOB dynamics in real time. The performance of TWAP strategies improved as the number of orders increased, with diminishing returns after a certain point. The VWAP strategy outperformed the TWAP strategy when trade activity in the market varied greatly and the number of orders was sufficiently large.
+
+\section{Future Research}
+\subsection{Improving the Queue-Reactive Model}
+Several improvements could possibly make the queue-reactive model more accurately reflect real-life LOB dynamics. 
+
+As in the model used by \cite{A6}, negative arrivals could be split into cancellation orders and market orders where their rates are estimated separately. This differentiation would eliminate the need for the assumption used in the model negative orders at the best bid or ask are assumed to be market orders and negative orders elsewhere are assumed to be cancellation orders. Unfortunately, estimating the rates separately with our data set is not possible since information on whether a negative arrivals is a cancellation or market order is not given, but it may be possible with a different data set.
+
+The model also assumes that arrivals at each position are independent of the current shape of the LOB. In \cite{A6}, for example, the arrival rates differ based on the level at the given position. Rates are also affected by whether the price is the best bid or ask price. Although different LOB shapes likely result in different rates of arrivals, there was not enough data estimate the rates given different LOB shapes. More data is needed to consistently estimate these parameters. The same could be said about the size of arrivals under different LOB shapes.
+
+The arrivals rates and average event size estimates mean that the price of the security drifts over time from endogenous activity over time. Exogenous shocks in the LOB could also be introduced if the price of the security is expected to drift up or down over time. 
+
+\subsection{Further Trading Execution Strategy Testing}
+In section \ref{ch:trade_execution}, we tested the performance of two simple, widely used strategies TWAP and VWAP. We could also test different strategies as described in \ref{ch:strategies}. The simulation program at the moment only allows for market orders needed for the TWAP and VWAP strategies. It could be expanded to include different agent activities such as limit orders, stop-loss orders, and order cancellations that may be present in other strategies. Since our model adjusts takes into account agent actions in impacting LOB dynamics,Our methods could also be used to expand upon the studies \cite{A3} and \cite{A4} which use reinforcement learning to tackle optimal trade execution problems.
+
+The simulated market environment also allows for including multiple players with different behaviors. For example, trade execution strategies could be tested in the presence of an antagonistic player that reacts to an agent's actions.
+
+\subsection{Applying the Model to Different Securities}
+Finally, the work in this thesis is broadly applicable to modelling the behavior of LOBs for securities across different exchanges. High frequency LOB data is available for many exchanges that broker trades of stocks, options, futures, and other securities. For example, https://lobsterdata.com offers high frequency LOB data for the NASDAQ. Data like LOBSTER could be used to model the behavior of the security's LOB and test trade execution strategies using simulation methods from this thesis.
