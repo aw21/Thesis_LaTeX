@@ -34,16 +34,3 @@ def AES_and_Rate(updates, starting_times):
             
 
 AESs, numbers_of_events, average_rates = AES_and_Rate(all_updates, starting_times)
-
-for k in range(-K,K+1):
-    if k != 0:
-        print("k = {}".format(k))
-        print("AES Positive: {}".format(AESs[(k,"pos")]))
-        print("n = {}".format(numbers_of_events[(k,"pos")]))
-        print("Average Rate: {}".format(average_rates[(k,"pos")]))
-        print("Multiplied: {}".format(AESs[(k,"pos")]*average_rates[(k,"pos")]))
-        print("AES Negative: {}".format(AESs[(k,"neg")]))
-        print("n = {}".format(numbers_of_events[(k,"neg")]))
-        print("Average Rate: {}".format(average_rates[(k,"neg")]))
-        print("Multiplied: {}".format(AESs[(k,"neg")]*average_rates[(k,"neg")]))
-        print()
