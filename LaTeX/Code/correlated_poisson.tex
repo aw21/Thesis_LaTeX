@@ -8,9 +8,6 @@ def inverse_PDF_Poisson(average, u):
         s = s + p
     return x  
 
-lambda1 = 2
-lambda2 = 3
-
 def mean_and_correlation(desired_correlation):
     n = 10000
     y = [np.random.multivariate_normal(mean=[0,0],cov=[[1,desired_correlation],[desired_correlation,1]]) \
@@ -22,13 +19,10 @@ def mean_and_correlation(desired_correlation):
     actual_correlation = np.corrcoef(x1,x2)[0][1]
     
     return np.mean(x1), np.mean(x2), actual_correlation
-    
-data = []
 
 for corr in range(-10,11):
     c = corr / 10
     x1_mean, x2_mean, correlation = mean_and_correlation(c)
-    data.append([round(x1_mean,3), round(x2_mean,3), round(correlation,3)])
     print("Desired correlation: {}".format(c))
     print("x1 mean: {}".format(x1_mean))
     print("x2 mean: {}".format(x2_mean))
