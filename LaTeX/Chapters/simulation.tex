@@ -1,7 +1,7 @@
 \section{Generating Correlated Poisson Variables}\label{ch:generate_correlated_poisson}
 In presenting the simulation procedure, it is necessary to discuss the method for generating correlated Poisson processes. The goal is to generate a multivariate random variable $\boldsymbol{X} = (X_1, X_2, \ldots, X_d)$ with mean $(\lambda_1, \lambda_2, \ldots, \lambda_{d})$ and $d$ x $d$ correlation matrix $R_d$ where each $X_i$ has a marginal distribution that is the same as the distribution of a Poisson variable with mean $\lambda_i$. That is, $P(X_i = x_i) = f_i(x_i)$, where $f_i$ is the probability mass function of a Poisson variable with mean $\lambda_i$. \cite{A8} describes a procedure for generating $\boldsymbol{X}$ using the copula approach. 
 
-A copula is defined as any joint probability distribution function where each marginal distribution is uniformly distributed (\cite{B1}). That is, 
+A copula is defined as any joint probability cumulative distribution function where each marginal distribution is uniformly distributed (\cite{B1}). That is, 
 
 $$C(\boldsymbol{u}): [0,1]^d \to [0,1]$$ 
 
