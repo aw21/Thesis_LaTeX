@@ -4,7 +4,7 @@ This thesis analyzes a problem in quantitative finance known as the optimal trad
 
 More formally, given a volume $V$ of shares to buy and a time limit $T$, the agent seeks to limit the amount of money spent to acquire these shares. The actual prices at which the agent can acquire the shares depend on the supply of the shares at different prices. Thus, if $V$ is high, the trade should not be executed in one order, since many of the shares are only available at higher prices. The agent can instead choose to split the order into smaller slices over time to realize lower prices overall. In general, there is a trade-off between how quickly the trade is executed and the market impact, so increased prices may be inevitable when $T$ is low. However, various strategies have been adopted to minimize the price impact of large trades.
 
-When evaluating the performance of trading strategies, the common industry benchmark of Volume Weighted Average Price (VWAP) is used. If $V$ is acquired throughout the time frame in chunks of size $v_i$ and prices $p_i$ where $\sum\limits_i{v_i} = V$, the VWAP is defined as 
+When evaluating the performance of trading strategies, the common industry benchmark of the Volume Weighted Average Price (VWAP) is used. If $V$ is acquired throughout the time frame in chunks of size $v_i$ and price $p_i$ where $\sum\limits_i{v_i} = V$, the VWAP is defined as 
 
 $$ \frac{\sum\limits_i{v_i p_i}}{\sum\limits_i{v_i}}$$
 
@@ -31,7 +31,7 @@ Volume           & Price          & Price           & Volume          \\
 
 The price of the stock could be considered \$48.695, which is the midpoint between the best bid and best ask price. 
 
-Say, for example, that the hedge fund receives a signal to buy 7000 shares of Coca-Cola. It could do so by issuing a market order, in which the trade is executed immediately at the best market price(s). If there is not enough supply at the best ask price, the order will progressively move up the order book until it is satisfied. In this case, it would buy 500 shares at \$48.70, 1500 shares at \$48.71, 3500 shares at \$48.72, and the remaining 1500 shares at \$48.75. In this case, the VWAP would be (500*48.70 + 1500*48.71 + 3500*48.72 + 1500*48.75)/7000 = \$48.723/share. It could also place a limit order, which is only executed at the specified price or better. For example, it could place a limit order for 7000 shares at \$48.67. This order would be appear in the bid side of the order book until it is matched with a market order from the ask side. The updated LOB is shown in Table~\ref{tab:coke2}.
+Say, for example, that the hedge fund receives a signal to buy 7000 shares of Coca-Cola. It could do so by issuing a market buy order, in which the trade is executed immediately at the best market price(s). If there is not enough supply at the best ask price, the order will progressively move up the order book until it is satisfied. In this case, it would buy 500 shares at \$48.70, 1500 shares at \$48.71, 3500 shares at \$48.72, and the remaining 1500 shares at \$48.75. In this case, the VWAP would be (500*48.70 + 1500*48.71 + 3500*48.72 + 1500*48.75)/7000 = \$48.723/share. It could also place a limit buy order, which is only executed at the specified price or better. For example, it could place a limit order for 7000 shares at \$48.67. This order would be appear in the bid side of the order book until it is matched with a sell order. The updated LOB is shown in Table~\ref{tab:coke2}.
 
 \begin{table}[htbp]
 \caption{Coca-Cola Updated Limit Order Book} \label{tab:coke2}

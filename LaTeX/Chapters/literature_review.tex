@@ -28,13 +28,13 @@ $k$          & Price          & Price           & $k$          \\
 \end{center}
 \end{table}
 
-An event at position $k$ occurs any time that the number of shares offered at position $k$ changes. It increases when a trader places a limit order at the price of position $k$ and decreases when it is either consumed by a market order from the other side or a limit order is cancelled.
+An event at position $k$ occurs any time the number of shares offered at position $k$ changes. It increases when a trader places a limit order at the price of position $k$ and decreases when it is either consumed by a market order from the other side or a limit order is cancelled.
 
 The simplest model assumes that $Q_k$ is independent for each $k$. Each jump when $Q_k$ increases by 1 and $Q = q$ follows a Poisson arrival with rate $\lambda^+_k(q)$ and each jump when $Q_k$ decreases by 1 and $Q = q$ follows a Poisson arrival with rate $\lambda^-_k(q)$. In order to model each $Q_k$ as a positive integer with changes equal to 1, $Q_k$ represents the number of Average Event Sizes present at the LOB position. The $AES$ is the average size of the absolute change in the number of shares at the queue position whenever a change occurs, where the $AES$ at each position ($AES_k$) could differ. In this model, $Q_k = n$ would mean that there are $n*AES_k$ shares offered at position $k$.
 
 $p_0$ is chosen to be a mid-price in between the best bid and ask prices. Let $p_{-1}$ be the best bid price and $p_1$ be the best ask price. If $p_{-1}$ and $p_1$ are an odd number of ticks apart, then 
 $$p_0=  (p_{-1}+p_1)/2$$
-If $b$ and $a$ are an even number of ticks apart, $p_0$ could be picked to be $(p_{-1}+p_1)/2 + 0.5$ or $(p_{-1}+p_1)/2 - 0.5$. The one that is closest to the previous reference price is chosen.
+If $p_{-1}$ and $p_1$ are an even number of ticks apart, $p_0$ could be picked to be $(p_{-1}+p_1)/2 + 0.5$ or $(p_{-1}+p_1)/2 - 0.5$. The one that is closest to the previous reference price is chosen.
 
 When an event occurs that changes the best bid or ask, $p_0$ is updated. It can be seen that under certain conditions, this LOB model follows an ergodic Markov process. Historical LOB data can then be used to estimate $AES_k$ and $\lambda^{\pm}_k(q)$ for each $k$.
 
