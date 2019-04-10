@@ -47,16 +47,6 @@ def simulate(starting_ref_price, starting_book, starting_time, num_intervals, T,
         all_events = sorted(events + orders, key=lambda x: x[0])
         
         for (t,change,k,is_order) in all_events:
-            
-            if False:
-                print("Interval: {}".format(n + 1))
-                print("Ref price: {}".format(ref_price))
-                for x in sizes:
-                    if abs(ref_price - x) < K:
-                        print("{}: {}".format(x,sizes[x]))
-                print("Event: time = {}, k = {}, change = {}, order = {}".format(t,k,change,is_order))
-                print()
-                print()
                 
             if is_order:
                 left_to_fill = min(-change,a)
