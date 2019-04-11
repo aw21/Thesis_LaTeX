@@ -9,7 +9,7 @@ When evaluating the performance of trading strategies, the common industry bench
 $$ \frac{\sum\limits_i{v_i p_i}}{\sum\limits_i{v_i}}$$
 
 \section{The Limit Order Book} \label{ch:background}
-This problem can be illustrated more clearly by discussing the centralized limit order book (LOB). The LOB is the trading mechanism used by most exchanges around the world. The LOB for a security consists of the prices (also known as ticks) and volumes at which customers are willing to buy and sell the security (bids and asks respectively). For example, part of the LOB for Coca-Cola (KO) on the NYSE may look like Table~\ref{tab:coke1}, in which the 5 best bids and asks are listed:
+This problem can be illustrated more clearly by discussing the centralized limit order book (LOB). The LOB is the trading mechanism used by most exchanges around the world. The LOB for a security consists of the prices and volumes at which customers are willing to buy and sell the security (bids and asks respectively) where the possible prices occur at increments of the tick size. For example, part of the LOB for Coca-Cola (KO) on the NYSE where the tick size is \$0.01 may look like Table~\ref{tab:coke1}, in which the 5 best bids and asks are listed:
 
 \begin{table}[htbp]
 \caption{Coca-Cola Limit Order Book} \label{tab:coke1}
@@ -29,7 +29,7 @@ Volume           & Price          & Price           & Volume          \\
 \end{center}
 \end{table}
 
-The price of the stock could be considered \$48.695, which is the midpoint between the best bid and best ask price. 
+The price of the stock is considered to be \$48.695, which is the midpoint between the best bid and best ask prices. 
 
 Say, for example, that the hedge fund receives a signal to buy 7000 shares of Coca-Cola. It could do so by issuing a market buy order, in which the trade is executed immediately at the best market price(s). If there is not enough supply at the best ask price, the order will progressively move up the order book until it is satisfied. In this case, it would buy 500 shares at \$48.70, 1500 shares at \$48.71, 3500 shares at \$48.72, and the remaining 1500 shares at \$48.75. In this case, the VWAP would be (500*48.70 + 1500*48.71 + 3500*48.72 + 1500*48.75)/7000 = \$48.723/share. It could also place a limit buy order, which is only executed at the specified price or better. For example, it could place a limit order for 7000 shares at \$48.67. This order would be appear in the bid side of the order book until it is matched with a sell order. The updated LOB is shown in Table~\ref{tab:coke2}.
 
@@ -53,5 +53,5 @@ Volume           & Price          & Price           & Volume          \\
 
 Exchanges typically institute a time priority policy, which means that orders submitted at the same price are executed in the order at which they arrived. Although the limit order has a maximum price at execution, it is not guaranteed to execute like the market order. 
 
-Of course, the agent could also place multiple market or limit orders over time to achieve the desired position while minimizing market impact. Splitting the trade into multiple orders forms the basis of many optimal trade execution strategies.
+Of course, the agent could also place multiple market or limit orders over time to acquire the inventory while minimizing market impact. Splitting the trade into multiple orders forms the basis of many optimal trade execution strategies.
 
